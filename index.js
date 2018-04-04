@@ -77,7 +77,7 @@ app.post('/sends/create', function (req, res) {
   // console.log(req);
 
   if (!req.body.Destination || !req.body.TokenName) {
-    res.status(404).end("ERROR: A required data field is missing. SOLUTION: Ensure provide Destination and TokenName data fields.");
+    res.status(400).end("ERROR: A required data field is missing. SOLUTION: Ensure provide Destination and TokenName data fields.");
   }
 
   const DESTINATION = req.body.Destination.toUpperCase();
@@ -116,6 +116,7 @@ app.post('/sends/create', function (req, res) {
 
         // Step 3: Ensure account can accept asset. 
         let canAcceptToken = false;
+        let i = 0;
         result.balances.forEach((b) => {
           if (b.asset_code) {
             // console.log("typeof b.asset_code", typeof b.asset_code);
@@ -123,8 +124,12 @@ app.post('/sends/create', function (req, res) {
             if (TOKEN_NAME === b.asset_code.toUpperCase()) {
               canAcceptToken = true;
               // There's no built-in ability to break in forEach. https://stackoverflow.com/a/2641374
+              if (parseFloat(b.balance) >= parseFloat(accountMaxAmounts[TOKEN_NAME])) {
+                res.status(200).end("Your account contains more than " + accountMaxAmounts[TOKEN_NAME] + " " + TOKEN_NAME + "s. Tip other people with those tokens, then try again.");
+              }
             }
           }
+          i++;
         });
         console.log(canAcceptToken);
         if (canAcceptToken) {
