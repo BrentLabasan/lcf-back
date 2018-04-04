@@ -60,15 +60,8 @@ app.post('/send/create', function (req, res) {
       .call().then((r) => {
         console.log(r);
 
-        // console.log(typeof r);
-        // console.log(Object.getOwnPropertyNames(r));
-        // console.log(JSON.stringify(r));
-        // console.log(JSON.parse(JSON.stringify(r)));
-        let result = JSON.parse(JSON.stringify(r));
-        // console.log("result.id", result.id);
-        // console.log("result.balances", result.balances);
+        let result = JSON.parse(JSON.stringify(r)); // April 4 2018 deleted logs to finaggle this
 
-        // alert(result.id);
         // Step 2:  Ensure account has at least 4.5 XLM to cover base fee.s
         if (result.balances[result.balances.length - 1].balance >= 4.5) {
           // alert("Account has more than 4.5");
@@ -79,7 +72,7 @@ app.post('/send/create', function (req, res) {
 
         // Step 3: Ensure account can accept asset. 
         let canAcceptToken = false;
-        result.balances.forEach((b: any) => {
+        result.balances.forEach((b) => {
           if (b.asset_code) {
             // console.log("typeof b.asset_code", typeof b.asset_code);
             console.log("compare balances accepted vs. tab's token", this.props.selectedToken.toUpperCase(), b.asset_code.toUpperCase());
