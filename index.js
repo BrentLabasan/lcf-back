@@ -43,8 +43,12 @@ app.get('/send/create', function (request, response) {
 // http://theusualstuff.com/handle-form-data-express-get-post-method/
 //route the GET request to the specified path, "/user". 
 //This sends the user information to the path  
-app.post('/user', function (req, res) {
+app.post('/send/create', function (req, res) {
   // console.log(req);
+  if (!req.body.TokenName || !req.body.Amount || !req.body.Destination) {
+
+  }
+
   response = {
     TokenName: req.body.TokenName,
     Amount: req.body.Amount,
