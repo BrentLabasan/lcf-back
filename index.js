@@ -1,5 +1,8 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 var moment = require('moment');
 
 const { Client } = require('pg');
@@ -32,6 +35,32 @@ app.get('/', function(request, response) {
 app.get('/send/create', function(request, response) {
   response.send('Creating a Send.')
 })
+
+
+
+// http://theusualstuff.com/handle-form-data-express-get-post-method/
+//route the GET request to the specified path, "/user". 
+//This sends the user information to the path  
+app.post('/user', function(req, res){
+  console.log(req);
+  response = {
+      first_name : req.body.first_name,
+      last_name : req.body.last_name,
+      gender: req.body.gender
+      };
+  
+  //this line is optional and will print the response on the command prompt
+  //It's useful so that we know what infomration is being transferred 
+  //using the server
+  console.log(response);
+  
+  //convert the response in JSON format
+  res.end(JSON.stringify(response));
+});
+
+
+
+
 
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
