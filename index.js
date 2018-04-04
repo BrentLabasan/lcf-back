@@ -122,7 +122,7 @@ app.post('/sends/create', function (req, res) {
           // We can fetch the current sequence number for the source account from Horizon.
           server.loadAccount(sourcePublicKey)
             .then(function (account) {
-              const asset;
+              let asset;
               if (TOKEN_NAME === 'XLM') {
                 asset = StellarSdk.Asset.native();
               } if (TOKEN_NAME.length >= 1 && TOKEN_NAME.length <= 12) {
@@ -140,7 +140,7 @@ app.post('/sends/create', function (req, res) {
                   // Specify 350.1234567 lumens. Lumens are divisible to seven digits past
                   // the decimal. They are represented in JS Stellar SDK in string format
                   // to avoid errors from the use of the JavaScript Number data structure.
-                  amount: '350.1234567',
+                  amount: AMOUNT,
                 }))
                 // Uncomment to add a memo (https://www.stellar.org/developers/learn/concepts/transactions.html)
                 // .addMemo(StellarSdk.Memo.text('Hello world!'))
@@ -162,6 +162,7 @@ app.post('/sends/create', function (req, res) {
                   console.log(JSON.stringify(transactionResult, null, 2));
                   console.log('\nSuccess! View the transaction at: ');
                   console.log(transactionResult._links.transaction.href);
+                  res.end("Transaction successfully sent! " + AMOUNT);
                 })
                 .catch(function (err) {
                   console.log('An error has occured:');
