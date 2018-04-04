@@ -42,7 +42,7 @@ app.get('/send/create', function (request, response) {
 //route the GET request to the specified path, "/user". 
 //This sends the user information to the path  
 app.post('/user', function (req, res) {
-  console.log(req);
+  // console.log(req);
   response = {
     TokenName: req.body.TokenName,
     Amount: req.body.Amount,
