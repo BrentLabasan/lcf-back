@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "express": "^4.13.3",
+    "moment": "^2.22.0",
+    "pg": "^7.4.1",
     "stellar-sdk": "^0.8.0"
   },
   "engines": {
