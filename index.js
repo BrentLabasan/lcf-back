@@ -128,7 +128,7 @@ app.post('/sends/create', function (req, res) {
               } if (TOKEN_NAME.length >= 1 && TOKEN_NAME.length <= 12) {
                 asset = new Asset(TOKEN_NAME, process.env["ISSUER_KEY_" + TOKEN_NAME]);
               } else {
-
+                res.end("ERROR: Invalid token. (But how did it get past previous checks?");
               }
 
               var transaction = new StellarSdk.TransactionBuilder(account)
