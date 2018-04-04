@@ -54,6 +54,22 @@ const sendAmounts = {
   MASLOW5: "5"
 }
 
+const accountMaxAmounts = {
+  XLM: "10",
+  SECOND: "500",
+  MINUTE: "250",
+  HOUR: "125",
+  DAY: "60",
+  WEEK: "30",
+  MONTH: "15",
+  YEAR: "5",
+  MASLOW1: "5",
+  MASLOW2: "10",
+  MASLOW3: "15",
+  MASLOW4: "20",
+  MASLOW5: "25"
+}
+
 // http://theusualstuff.com/handle-form-data-express-get-post-method/
 //route the GET request to the specified path, "/user". 
 //This sends the user information to the path  
