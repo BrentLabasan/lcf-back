@@ -39,19 +39,19 @@ app.get('/send/create', function (request, response) {
 })
 
 const sendAmounts = {
-  XLM: .00001,
-  SECOND: 150.5,
-  MINUTE: 75.5,
-  HOUR: 30.5,
-  DAY: 24.5,
-  WEEK: 12.5,
-  MONTH: 6.5,
-  YEAR: 1.5,
-  MASLOW1: 1,
-  MASLOW2: 2,
-  MASLOW3: 3,
-  MASLOW4: 4,
-  MASLOW5: 5
+  XLM: ".00001",
+  SECOND: "150.5",
+  MINUTE: "75.5",
+  HOUR: "30.5",
+  DAY: "24.5",
+  WEEK: "12.5",
+  MONTH: "6.5",
+  YEAR: "1.5",
+  MASLOW1: "1",
+  MASLOW2: "2",
+  MASLOW3: "3",
+  MASLOW4: "4",
+  MASLOW5: "5"
 }
 
 // http://theusualstuff.com/handle-form-data-express-get-post-method/
@@ -176,7 +176,7 @@ app.post('/sends/create', function (req, res) {
                   console.log(JSON.stringify(transactionResult, null, 2));
                   console.log('\nSuccess! View the transaction at: ');
                   console.log(transactionResult._links.transaction.href);
-                  res.end(sendAmounts[TOKEN_NAME] + " " + TOKEN_NAME + " SUCCESSFULLY senT to " + DESTINATION ".");
+                  res.end(sendAmounts[TOKEN_NAME] + " " + TOKEN_NAME + " successfuly sent to " + DESTINATION + ".");
                 })
                 .catch(function (err) {
                   console.log('An error has occured:');
