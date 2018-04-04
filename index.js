@@ -38,7 +38,21 @@ app.get('/send/create', function (request, response) {
   response.send('Creating a Send.')
 })
 
-
+const sendAmounts = {
+  XLM: .00001,
+  SECOND: 150.5,
+  MINUTE: 75.5,
+  HOUR: 30.5,
+  DAY: 24.5,
+  WEEK: 12.5,
+  MONTH: 6.5,
+  YEAR: 1.5,
+  MASLOW1: 1,
+  MASLOW2: 2,
+  MASLOW3: 3,
+  MASLOW4: 4,
+  MASLOW5: 5
+}
 
 // http://theusualstuff.com/handle-form-data-express-get-post-method/
 //route the GET request to the specified path, "/user". 
