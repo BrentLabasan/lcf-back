@@ -122,12 +122,21 @@ app.post('/sends/create', function (req, res) {
           // We can fetch the current sequence number for the source account from Horizon.
           server.loadAccount(sourcePublicKey)
             .then(function (account) {
+              const asset;
+              if (TOKEN_NAME === 'XLM') {
+                asset = StellarSdk.Asset.native();
+              } if (TOKEN_NAME.length >= 1 && TOKEN_NAME.length <= 12) {
+                asset = new Asset(TOKEN_NAME, process.env["ISSUER_KEY_" + TOKEN_NAME]);
+              } else {
+
+              }
+
               var transaction = new StellarSdk.TransactionBuilder(account)
                 // Add a payment operation to the transaction
                 .addOperation(StellarSdk.Operation.payment({
                   destination: receiverPublicKey,
                   // The term native asset refers to lumens
-                  asset: StellarSdk.Asset.native(),
+                  asset: asset,
                   // Specify 350.1234567 lumens. Lumens are divisible to seven digits past
                   // the decimal. They are represented in JS Stellar SDK in string format
                   // to avoid errors from the use of the JavaScript Number data structure.
