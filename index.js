@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var moment = require('moment');
 
@@ -28,11 +28,11 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
-app.get('/', function(request, response) {
+app.get('/', function (request, response) {
   response.send('Hello World!')
 })
 
-app.get('/send/create', function(request, response) {
+app.get('/send/create', function (request, response) {
   response.send('Creating a Send.')
 })
 
@@ -41,19 +41,20 @@ app.get('/send/create', function(request, response) {
 // http://theusualstuff.com/handle-form-data-express-get-post-method/
 //route the GET request to the specified path, "/user". 
 //This sends the user information to the path  
-app.post('/user', function(req, res){
+app.post('/user', function (req, res) {
   console.log(req);
   response = {
-      first_name : req.body.first_name,
-      last_name : req.body.last_name,
-      gender: req.body.gender
-      };
-  
+    TokenName: req.body.TokenName,
+    Amount: req.body.Amount,
+    Destination: req.body.Destination,
+    SendStart: req.body.SendStart
+  };
+
   //this line is optional and will print the response on the command prompt
   //It's useful so that we know what infomration is being transferred 
   //using the server
   console.log(response);
-  
+
   //convert the response in JSON format
   res.end(JSON.stringify(response));
 });
@@ -62,6 +63,6 @@ app.post('/user', function(req, res){
 
 
 
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function () {
   console.log("Node app is running at localhost:" + app.get('port'))
 })
