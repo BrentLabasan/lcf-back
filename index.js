@@ -126,7 +126,8 @@ app.post('/sends/create', function (req, res) {
               if (TOKEN_NAME === 'XLM') {
                 asset = StellarSdk.Asset.native();
               } if (TOKEN_NAME.length >= 1 && TOKEN_NAME.length <= 12) {
-                asset = new Asset(TOKEN_NAME, process.env["ISSUER_KEY_" + TOKEN_NAME]);
+                console.log(process.env["ISSUER_KEY_" + TOKEN_NAME].toString());
+                asset = new StellarSdk.Asset(TOKEN_NAME, process.env["ISSUER_KEY_" + TOKEN_NAME].toString());
               } else {
                 res.end("ERROR: Invalid token. (But how did it get past previous checks?");
               }
