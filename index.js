@@ -81,7 +81,7 @@ app.post('/sends/create', function (req, res) {
 
         } else {
           // alert("Account has less than 4.5");
-          res.end("ERROR: Destination account does not have enough XLM (4.5) in baseline funds to support all Time Saved Tokens. SOLUTION: Put more XLM into thaat account.");
+          res.end("ERROR: Destination account does not have enough XLM (4.5) in baseline funds to support all Time Saved Tokens. SOLUTION: Put more XLM into that account.");
         }
 
         // Step 3: Ensure account can accept asset. 
@@ -100,7 +100,7 @@ app.post('/sends/create', function (req, res) {
         if (canAcceptToken) {
           // Account can accept token.
         } else {
-          res.end("ERROR: Destination account is not set up to accept " + TOKEN_NAME + ". SOLUTION: Set up destinatin account to accept " + TOKEN_NAME + ".");
+          res.end("ERROR: Destination account is not set up to accept " + TOKEN_NAME + ". SOLUTION: Set up destination account to accept " + TOKEN_NAME + ".");
         }
 
       });
@@ -120,7 +120,7 @@ app.post('/sends/create', function (req, res) {
   };
   console.log(response);
   //convert the response in JSON format
-  res.end(JSON.stringify(response));
+  // res.end(JSON.stringify(response));
 
   // BEGIN TOKEN SENDING PROCESS !!
 
