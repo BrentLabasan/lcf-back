@@ -46,32 +46,30 @@ app.get('/send/create', function (request, response) {
 app.post('/sends/create', function (req, res) {
   // console.log(req);
   if (!req.body.Destination || !req.body.TokenName || !req.body.Amount) {
-    res.end("ERROR: A required data field is missing. SOLUTION: Ensure provide Destination, TokenName, and Amount data fields.");
+    res.end(req.body.Destination + req.body.TokenName + req.body.Amount + "ERROR: A required data field is missing. SOLUTION: Ensure provide Destination, TokenName, and Amount data fields.");
     res.sendStatus(400);
   }
 
-  req.body.Destination = req.body.Destination.toUpperCase();
-  req.body.TokenName = req.body.TokenName.toUpperCase();
+  const DESTINATION = req.body.Destination.toUpperCase();
+  const TOKEN_NAME = req.body.TokenName.toUpperCase();
+  const AMOUNT = req.body.Amount;
 
-  let tokenNames = ["XLM", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR", "MASLOW1", "MASLOW2", "MASLOW3", "MASLOW4", "MASLOW5" ];
-  if (tokenNames.indexOf(req.body.TokenName) < 0)
-  {
-    res.end("ERROR: " + req.body.TokenName + " is not a supported token. SOLUTION: Resend API request with supported token");
+  let tokenNames = ["XLM", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR", "MASLOW1", "MASLOW2", "MASLOW3", "MASLOW4", "MASLOW5"];
+  if (tokenNames.indexOf(TOKEN_NAME) < 0) {
+    res.end("ERROR: " + TOKEN_NAME + " is not a supported token. SOLUTION: Resend API request with supported token");
   }
 
-  if (!(req.body.Amount >= 1))
-  {
+  if (!(AMOUNT >= 1)) {
     res.end("ERROR: The fountain's minimum send amount is 1. SOLUTION: Resend API request with correct amount.");
   }
 
   // Step 1: Ensure public address/key is valid.
-  if (StellarSdk.StrKey.isValidEd25519PublicKey(address)) {
+  if (StellarSdk.StrKey.isValidEd25519PublicKey(DESTINATION)) {
     // address isValidEd25519PublicKey
-    localStorage.setItem('lastEnteredAddress', address);
     // console.log("corr")
     let server = new StellarSdk.Server('https://horizon.stellar.org');
     server.accounts()
-      .accountId(address)
+      .accountId(DESTINATION)
       .call().then((r) => {
         console.log(r);
 
@@ -92,7 +90,7 @@ app.post('/sends/create', function (req, res) {
           if (b.asset_code) {
             // console.log("typeof b.asset_code", typeof b.asset_code);
             // console.log("compare balances accepted vs. tab's token", this.props.selectedToken.toUpperCase(), b.asset_code.toUpperCase()); // from front end code
-            if (req.body.TokenName.toUpperCase() === b.asset_code.toUpperCase()) {
+            if (TOKEN_NAME === b.asset_code.toUpperCase()) {
               canAcceptToken = true;
               // There's no built-in ability to break in forEach. https://stackoverflow.com/a/2641374
             }
@@ -102,12 +100,12 @@ app.post('/sends/create', function (req, res) {
         if (canAcceptToken) {
           // Account can accept token.
         } else {
-          res.end("ERROR: Destination account is not set up to accept " + req.body.TokenName + ". SOLUTION: Set up destinatin account to accept " + req.body.TokenName + ".");
+          res.end("ERROR: Destination account is not set up to accept " + TOKEN_NAME + ". SOLUTION: Set up destinatin account to accept " + TOKEN_NAME + ".");
         }
 
       });
   } else { // if query entered into field isn't a valid public key
-    console.log("ERROR: Account address " + req.body.Destination + " is not a valid address. SOLUTION: Provide address in Ed25519 format." );
+    res.end("ERROR: Account address " + DESTINATION + " is not a valid address. SOLUTION: Provide address in Ed25519 format.");
     // this.setState({ addressIsValid: false, hasEnoughXlm: false, canAcceptToken: false });
   }
 
