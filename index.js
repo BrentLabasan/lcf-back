@@ -46,7 +46,7 @@ app.get('/send/create', function (request, response) {
 app.post('/send/create', function (req, res) {
   // console.log(req);
   if (!req.body.Destination || !req.body.TokenName || !req.body.Amount) {
-    res.end("ERROR: A required data field is missing. Ensure provide Destination, TokenName, and Amount data fields.");
+    res.end("ERROR: A required data field is missing. SOLUTION: Ensure provide Destination, TokenName, and Amount data fields.");
   }
 
   req.body.Destination = req.body.Destination.toUpperCase();
@@ -55,12 +55,12 @@ app.post('/send/create', function (req, res) {
   let tokenNames = ["XLM", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR", "MASLOW1", "MASLOW2", "MASLOW3", "MASLOW4", "MASLOW5" ];
   if (tokenNames.indexOf(req.body.TokenName) < 0)
   {
-    res.end(req.body.TokenName + " is not a supported token.");
+    res.end("ERROR: " + req.body.TokenName + " is not a supported token. SOLUTION: Resend API request with supported token");
   }
 
   if (!(req.body.Amount >= 1))
   {
-    res.end("The fountain's minimum send amount is 1.");
+    res.end("ERROR: The fountain's minimum send amount is 1. SOLUTION: Resend API request with correct amount.");
   }
 
   // Step 1: Ensure public address/key is valid.
@@ -82,7 +82,7 @@ app.post('/send/create', function (req, res) {
 
         } else {
           // alert("Account has less than 4.5");
-          res.end("ERROR: Destination account does not have enough XLM (4.5) in baseline funds to support all Time Saved Tokens. Put more XLM into thaat account.");
+          res.end("ERROR: Destination account does not have enough XLM (4.5) in baseline funds to support all Time Saved Tokens. SOLUTION: Put more XLM into thaat account.");
         }
 
         // Step 3: Ensure account can accept asset. 
