@@ -101,22 +101,22 @@ app.post('/sends/create', function (req, res) {
           // Account can accept token.
 
           // The source account is the account we will be signing and sending from.
-          var sourceSecretKey = 'SAKRB7EE6H23EF733WFU76RPIYOPEWVOMBBUXDQYQ3OF4NF6ZY6B6VLW';
+          var sourceSecretKey = process.env["SECRET_KEY_" + TOKEN_NAME];
 
           // Derive Keypair object and public key (that starts with a G) from the secret
           var sourceKeypair = StellarSdk.Keypair.fromSecret(sourceSecretKey);
           var sourcePublicKey = sourceKeypair.publicKey();
 
-          var receiverPublicKey = 'GAIRISXKPLOWZBMFRPU5XRGUUX3VMA3ZEWKBM5MSNRU3CHV6P4PYZ74D';
+          var receiverPublicKey = DESTINATION;
 
           // Configure StellarSdk to talk to the horizon instance hosted by Stellar.org
           // To use the live network, set the hostname to 'horizon.stellar.org'
-          var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+          var server = new StellarSdk.Server('https://horizon.stellar.org');
 
           // Uncomment the following line to build transactions for the live network. Be
           // sure to also change the horizon hostname.
-          // StellarSdk.Network.usePublicNetwork();
-          StellarSdk.Network.useTestNetwork();
+          StellarSdk.Network.usePublicNetwork();
+          // StellarSdk.Network.useTestNetwork();
 
           // Transactions require a valid sequence number that is specific to this account.
           // We can fetch the current sequence number for the source account from Horizon.
