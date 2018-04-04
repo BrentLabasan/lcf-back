@@ -52,6 +52,11 @@ app.post('/send/create', function (req, res) {
   req.body.Destination = req.body.Destination.toUpperCase();
   req.body.TokenName = req.body.Destination.TokenName();
 
+  let tokenNames = ["XLM", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR", "MASLOW1", "MASLOW2", "MASLOW3", "MASLOW4", "MASLOW5" ];
+  if (tokenNames.indexOf(req.body.TokenName) < 0)
+  {
+    res.end(req.body.TokenName + " is not a supported token.");
+  }
 
   // Step 1: Ensure public address/key is valid.
   if (StellarSdk.StrKey.isValidEd25519PublicKey(address)) {
