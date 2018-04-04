@@ -82,6 +82,7 @@ app.post('/send/create', function (req, res) {
 
         } else {
           // alert("Account has less than 4.5");
+          res.end("ERROR: Destination address does not have enough XLM (4.5) in baseline funds to support all Time Saved Tokens. Put more XLM into thaat account.");
         }
 
         // Step 3: Ensure account can accept asset. 
@@ -89,8 +90,8 @@ app.post('/send/create', function (req, res) {
         result.balances.forEach((b) => {
           if (b.asset_code) {
             // console.log("typeof b.asset_code", typeof b.asset_code);
-            console.log("compare balances accepted vs. tab's token", this.props.selectedToken.toUpperCase(), b.asset_code.toUpperCase());
-            if (this.props.selectedToken.toUpperCase() === b.asset_code.toUpperCase()) {
+            // console.log("compare balances accepted vs. tab's token", this.props.selectedToken.toUpperCase(), b.asset_code.toUpperCase()); // from front end code
+            if (req.body.TokenName.toUpperCase() === b.asset_code.toUpperCase()) {
               canAcceptToken = true;
               // There's no built-in ability to break in forEach. https://stackoverflow.com/a/2641374
             }
