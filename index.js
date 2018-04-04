@@ -45,8 +45,8 @@ app.get('/send/create', function (request, response) {
 //This sends the user information to the path  
 app.post('/send/create', function (req, res) {
   // console.log(req);
-  if (!req.body.TokenName || !req.body.Amount || !req.body.Destination) {
-
+  if (!req.body.Destination || !req.body.TokenName || !req.body.Amount) {
+    res.end("ERROR: A required data field is missing. Ensure provide Destination, TokenName, and Amount data fields.");
   }
 
   response = {
