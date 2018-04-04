@@ -106,7 +106,7 @@ app.post('/send/create', function (req, res) {
 
       });
   } else { // if query entered into field isn't a valid public key
-    console.log("query entered into field isn't a valid public key");
+    console.log("ERROR: Account address " + req.body.Destination + " is not a valid address. SOLUTION: Provide address in Ed25519 format." );
     // this.setState({ addressIsValid: false, hasEnoughXlm: false, canAcceptToken: false });
   }
 
