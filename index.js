@@ -6,7 +6,7 @@ app.use(cors()); // https://www.npmjs.com/package/cors
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var moment = require('moment');
-
+var StellarSdk = require('stellar-sdk');
 const { Client } = require('pg');
 
 const client = new Client({
