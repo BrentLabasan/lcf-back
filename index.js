@@ -13,9 +13,12 @@ client.connect();
 
 client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
   if (err) throw err;
+  console.log("BEGIN");
   for (let row of res.rows) {
+    console.log("ROW");
     console.log(JSON.stringify(row));
   }
+  console.log("END");
   client.end();
 });
 
