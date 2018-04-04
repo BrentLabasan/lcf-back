@@ -43,7 +43,7 @@ app.get('/send/create', function (request, response) {
 // http://theusualstuff.com/handle-form-data-express-get-post-method/
 //route the GET request to the specified path, "/user". 
 //This sends the user information to the path  
-app.post('/send/create', function (req, res) {
+app.post('/sends/create', function (req, res) {
   // console.log(req);
   if (!req.body.Destination || !req.body.TokenName || !req.body.Amount) {
     res.end("ERROR: A required data field is missing. SOLUTION: Ensure provide Destination, TokenName, and Amount data fields.");
