@@ -60,22 +60,22 @@ const sendAmounts = {
 app.post('/sends/create', function (req, res) {
   // console.log(req);
 
-  if (!req.body.Destination || !req.body.TokenName || !req.body.Amount) {
-    res.status(404).end(req.body.Destination + req.body.TokenName + req.body.Amount + "ERROR: A required data field is missing. SOLUTION: Ensure provide Destination, TokenName, and Amount data fields.");
+  if (!req.body.Destination || !req.body.TokenName) {
+    res.status(404).end("ERROR: A required data field is missing. SOLUTION: Ensure provide Destination and TokenName data fields.");
   }
 
   const DESTINATION = req.body.Destination.toUpperCase();
   const TOKEN_NAME = req.body.TokenName.toUpperCase();
-  const AMOUNT = req.body.Amount;
+  // const AMOUNT = req.body.Amount;
 
   let tokenNames = ["XLM", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR", "MASLOW1", "MASLOW2", "MASLOW3", "MASLOW4", "MASLOW5"];
   if (tokenNames.indexOf(TOKEN_NAME) < 0) {
     res.end("ERROR: " + TOKEN_NAME + " is not a supported token. SOLUTION: Resend API request with supported token");
   }
 
-  if (!(AMOUNT >= 1)) {
-    res.end("ERROR: The fountain's minimum send amount is 1. SOLUTION: Resend API request with correct amount.");
-  }
+  // if (!(AMOUNT >= 1)) {
+  //   res.end("ERROR: The fountain's minimum send amount is 1. SOLUTION: Resend API request with correct amount.");
+  // }
 
   // Step 1: Ensure public address/key is valid.
   if (StellarSdk.StrKey.isValidEd25519PublicKey(DESTINATION)) {
@@ -154,7 +154,7 @@ app.post('/sends/create', function (req, res) {
                   // Specify 350.1234567 lumens. Lumens are divisible to seven digits past
                   // the decimal. They are represented in JS Stellar SDK in string format
                   // to avoid errors from the use of the JavaScript Number data structure.
-                  amount: AMOUNT,
+                  amount: sendAmounts[TOKEN_NAME],
                 }))
                 // Uncomment to add a memo (https://www.stellar.org/developers/learn/concepts/transactions.html)
                 // .addMemo(StellarSdk.Memo.text('Hello world!'))
@@ -176,7 +176,7 @@ app.post('/sends/create', function (req, res) {
                   console.log(JSON.stringify(transactionResult, null, 2));
                   console.log('\nSuccess! View the transaction at: ');
                   console.log(transactionResult._links.transaction.href);
-                  res.end("Transaction successfully sent! " + AMOUNT);
+                  res.end(sendAmounts[TOKEN_NAME] + " " + TOKEN_NAME + " SUCCESSFULLY senT to " + DESTINATION ".");
                 })
                 .catch(function (err) {
                   console.log('An error has occured:');
