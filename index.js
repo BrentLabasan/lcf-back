@@ -47,6 +47,7 @@ app.post('/sends/create', function (req, res) {
   // console.log(req);
   if (!req.body.Destination || !req.body.TokenName || !req.body.Amount) {
     res.end("ERROR: A required data field is missing. SOLUTION: Ensure provide Destination, TokenName, and Amount data fields.");
+    res.sendStatus(400);
   }
 
   req.body.Destination = req.body.Destination.toUpperCase();
