@@ -58,6 +58,16 @@ app.post('/send/create', function (req, res) {
     res.end(req.body.TokenName + " is not a supported token.");
   }
 
+  if (tokenNames.indexOf(req.body.TokenName) < 0)
+  {
+    res.end(req.body.TokenName + " is not a supported token.");
+  }
+
+  if (!(req.body.Amount >= 1))
+  {
+    res.end("The fountain's minimum send amount is 1.");
+  }
+
   // Step 1: Ensure public address/key is valid.
   if (StellarSdk.StrKey.isValidEd25519PublicKey(address)) {
     // address isValidEd25519PublicKey
