@@ -50,7 +50,7 @@ app.post('/sends/create', function (req, res) {
   }
 
   req.body.Destination = req.body.Destination.toUpperCase();
-  req.body.TokenName = req.body.Destination.TokenName();
+  req.body.TokenName = req.body.TokenName.toUpperCase();
 
   let tokenNames = ["XLM", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR", "MASLOW1", "MASLOW2", "MASLOW3", "MASLOW4", "MASLOW5" ];
   if (tokenNames.indexOf(req.body.TokenName) < 0)
