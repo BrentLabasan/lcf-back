@@ -49,6 +49,10 @@ app.post('/send/create', function (req, res) {
     res.end("ERROR: A required data field is missing. Ensure provide Destination, TokenName, and Amount data fields.");
   }
 
+  req.body.Destination = req.body.Destination.toUpperCase();
+  req.body.TokenName = req.body.Destination.TokenName();
+
+
   // Step 1: Ensure public address/key is valid.
   if (StellarSdk.StrKey.isValidEd25519PublicKey(address)) {
     // address isValidEd25519PublicKey
