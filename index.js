@@ -178,7 +178,7 @@ app.post('/sends/create', function (req, res) {
                   amount: sendAmounts[TOKEN_NAME],
                 }))
                 // Uncomment to add a memo (https://www.stellar.org/developers/learn/concepts/transactions.html)
-                // .addMemo(StellarSdk.Memo.text('Hello world!'))
+                .addMemo(StellarSdk.Memo.text('LabasanCryptoFountain.com'))
                 .build();
 
               // Sign this transaction with the secret key
