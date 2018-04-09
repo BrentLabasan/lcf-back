@@ -105,11 +105,11 @@ app.post('/sends/create', function (req, res) {
     server.accounts()
       .accountId(DESTINATION)
       .call().then((r) => {
-        console.log(r);
+        // console.log(r);
 
-        let result = JSON.parse(JSON.stringify(r)); // April 4 2018 deleted logs to finaggle this
+        let result = JSON.parse(JSON.stringify(r)); // I dunno if there's a simpler way to do this. I just wanted to get it working ASAP.
 
-        // Step 2:  Ensure account has at least 4.5 XLM to cover base fee.s
+        // Step 2: Ensure account has at least 4.5 XLM to cover base fees for being able to accept allTime Saved Tokens.
         if (result.balances[result.balances.length - 1].balance >= 4.5) {
           // alert("Account has more than 4.5");
 
