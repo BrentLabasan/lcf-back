@@ -92,7 +92,7 @@ app.post('/sends/create', function (req, res) {
 
   let tokenNames = ["XLM", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR", "MASLOW1", "MASLOW2", "MASLOW3", "MASLOW4", "MASLOW5"];
   if (tokenNames.indexOf(TOKEN_NAME) < 0) {
-    res.end("ERROR: " + TOKEN_NAME + " is not a supported token. SOLUTION: Resend API request with supported token");
+    res.status(400).end("ERROR: " + TOKEN_NAME + " is not a supported token. SOLUTION: Resend API request with supported token.");
   }
 
   // if (!(AMOUNT >= 1)) {
