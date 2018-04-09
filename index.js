@@ -204,7 +204,7 @@ app.post('/sends/create', function (req, res) {
                 .catch(function (err) {
                   console.log('An error has occured:');
                   console.log(err);
-                  res.status(400).end("ERROR: An error has occured. Please contact BrentLabasan@gmail.com");
+                  res.status(500).end("ERROR: An error has occured. Please contact BrentLabasan@gmail.com");
                 });
             })
             .catch(function (e) {
@@ -216,7 +216,7 @@ app.post('/sends/create', function (req, res) {
 
       });
   } else { // if query entered into field isn't a valid public key
-    res.end("ERROR: Account address " + DESTINATION + " is not a valid address. SOLUTION: Provide address in Ed25519 format.");
+    res.status(400).end("ERROR: Account address " + DESTINATION + " is not a valid address. SOLUTION: Provide address in Ed25519 format.");
     // this.setState({ addressIsValid: false, hasEnoughXlm: false, canAcceptToken: false });
   }
 
