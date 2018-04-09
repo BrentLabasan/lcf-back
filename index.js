@@ -228,7 +228,7 @@ app.post('/sends/create', function (req, res) {
 
   // DESTINATION, TOKEN_NAME, and AMOUNT have been validated.
 
-  // old code
+  // old  logging code
   response = {
     TokenName: req.body.TokenName,
     Amount: req.body.Amount,
@@ -236,16 +236,9 @@ app.post('/sends/create', function (req, res) {
     SendStart: req.body.SendStart
   };
   console.log(response);
-  //convert the response in JSON format
   // res.end(JSON.stringify(response));
 
-  // BEGIN TOKEN SENDING PROCESS !!
-
 });
-
-
-
-
 
 app.listen(app.get('port'), function () {
   console.log("Node app is running at localhost:" + app.get('port'))
