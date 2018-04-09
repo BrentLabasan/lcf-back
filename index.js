@@ -110,9 +110,10 @@ app.post('/sends/create', function (req, res) {
         let result = JSON.parse(JSON.stringify(r)); // I dunno if there's a simpler way to do this. I just wanted to get it working ASAP.
 
         // Step 2: Ensure account has at least 4.5 XLM to cover base fees for being able to accept allTime Saved Tokens.
+        // *** WARNING !! ***
+        // TODO: Verify that when getting the balances info, that the XLM balance is always the last in the array!
         if (result.balances[result.balances.length - 1].balance >= 4.5) {
           // alert("Account has more than 4.5");
-
         } else {
           // alert("Account has less than 4.5");
           res.end("ERROR: Destination account does not have enough XLM (4.5) in baseline funds to support all Time Saved Tokens. SOLUTION: Put more XLM into that account.");
