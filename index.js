@@ -79,13 +79,11 @@ const accountMaxAmounts = {
 }
 
 // http://theusualstuff.com/handle-form-data-express-get-post-method/
-//route the GET request to the specified path, "/user". 
-//This sends the user information to the path  
 app.post('/sends/create', function (req, res) {
   // console.log(req);
 
   if (!req.body.Destination || !req.body.TokenName) {
-    res.status(400).end("ERROR: A required data field is missing. SOLUTION: Ensure provide Destination and TokenName data fields.");
+    res.status(400).end("ERROR: A required parameter is missing. SOLUTION: Provide proper Destination and TokenName parameters.");
   }
 
   const DESTINATION = req.body.Destination.toUpperCase();
