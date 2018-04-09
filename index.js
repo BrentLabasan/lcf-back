@@ -176,11 +176,7 @@ app.post('/sends/create', function (req, res) {
                 // Add a payment operation to the transaction
                 .addOperation(StellarSdk.Operation.payment({
                   destination: receiverPublicKey,
-                  // The term native asset refers to lumens
-                  asset: asset,
-                  // Specify 350.1234567 lumens. Lumens are divisible to seven digits past
-                  // the decimal. They are represented in JS Stellar SDK in string format
-                  // to avoid errors from the use of the JavaScript Number data structure.
+                  asset: asset, // "in string format to avoid errors from the use of the JavaScript Number data structure"
                   amount: sendAmounts[TOKEN_NAME],
                 }))
                 // Uncomment to add a memo (https://www.stellar.org/developers/learn/concepts/transactions.html)
