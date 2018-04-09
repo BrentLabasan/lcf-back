@@ -96,13 +96,11 @@ app.post('/sends/create', function (req, res) {
   }
 
   // if (!(AMOUNT >= 1)) {
-  //   res.end("ERROR: The fountain's minimum send amount is 1. SOLUTION: Resend API request with correct amount.");
+  //   res.status(400).end("ERROR: The fountain's minimum send amount is 1. SOLUTION: Resend API request with correct amount.");
   // }
 
   // Step 1: Ensure public address/key is valid.
   if (StellarSdk.StrKey.isValidEd25519PublicKey(DESTINATION)) {
-    // address isValidEd25519PublicKey
-    // console.log("corr")
     let server = new StellarSdk.Server('https://horizon.stellar.org');
     server.accounts()
       .accountId(DESTINATION)
