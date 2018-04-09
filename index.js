@@ -130,13 +130,14 @@ app.post('/sends/create', function (req, res) {
               canAcceptToken = true;
               // There's no built-in ability to break in forEach loop, which'd you'd want to do after confirming account can accept the token. Every balance is checked against. https://stackoverflow.com/a/2641374
               if (parseFloat(b.balance) >= parseFloat(accountMaxAmounts[TOKEN_NAME])) {
-                res.status(200).end("Your account contains more than " + accountMaxAmounts[TOKEN_NAME] + " " + TOKEN_NAME + "s. Tip other people with those tokens, then try again.");
+                res.status(200).end("Your account contains more than " + accountMaxAmounts[TOKEN_NAME] + " " + TOKEN_NAME + "s. Tip other people with those tokens, then come back to the fountain to get more tokens.");
               }
             }
           }
           i++;
         });
-        console.log(canAcceptToken);
+
+        // console.log(canAcceptToken);
         if (canAcceptToken) {
           // Account can accept token.
 
