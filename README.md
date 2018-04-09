@@ -2,6 +2,8 @@
 
 The API backend for LabasanCryptoFountain.com. It is a  barebones Node.js app using [Express 4](http://expressjs.com/).
 
+Postgress (PG) NPM package is listed in the package.json, but I'm not using it.
+
 ## TLDR
 
 ```sh

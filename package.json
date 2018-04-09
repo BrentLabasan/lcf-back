@@ -1,7 +1,7 @@
 {
-  "name": "node-js-sample",
-  "version": "0.2.0",
-  "description": "A sample Node.js app using Express 4",
+  "name": "lcf-back",
+  "version": "0.1.0",
+  "description": "The API backend for LabasanCryptoFountain.com.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -19,16 +19,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-sample"
+    "url": "https://github.com/brentlabasan/lcf-back"
   },
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "express",
+    "cryptocurrency",
+    "stellar",
+    "xlm",
+    "time-saved-token",
+    "maslow-token",
   ],
-  "author": "Mark Pundsack",
-  "contributors": [
-    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)"
-  ],
+  "author": "Brent Labasan",
   "license": "MIT"
 }
