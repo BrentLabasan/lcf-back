@@ -139,7 +139,7 @@ app.post('/sends/create', function (req, res) {
 
         // console.log(canAcceptToken);
         if (canAcceptToken) {
-          // Account can accept token.
+          // https://www.stellar.org/developers/js-stellar-sdk/reference/examples.html#creating-a-payment-transaction
 
           // The source account is the account we will be signing and sending from.
           var sourceSecretKey = process.env["SECRET_KEY_" + TOKEN_NAME];
