@@ -190,7 +190,7 @@ app.post('/sends/create', function (req, res) {
               transaction.sign(sourceKeypair);
 
               // Let's see the XDR (encoded in base64) of the transaction we just built
-              console.log(transaction.toEnvelope().toXDR('base64'));
+              // console.log(transaction.toEnvelope().toXDR('base64'));
 
               // Submit the transaction to the Horizon server. The Horizon server will then
               // submit the transaction into the network for us.
@@ -199,19 +199,19 @@ app.post('/sends/create', function (req, res) {
                   console.log(JSON.stringify(transactionResult, null, 2));
                   console.log('\nSuccess! View the transaction at: ');
                   console.log(transactionResult._links.transaction.href);
-                  res.end(sendAmounts[TOKEN_NAME] + " " + TOKEN_NAME + " successfuly sent to " + DESTINATION + ".");
+                  res.status(200).end(sendAmounts[TOKEN_NAME] + " " + TOKEN_NAME + " successfuly sent to " + DESTINATION + ".");
                 })
                 .catch(function (err) {
                   console.log('An error has occured:');
                   console.log(err);
+                  res.status(400).end("ERROR: An error has occured. Please contact BrentLabasan@gmail.com");
                 });
             })
             .catch(function (e) {
               console.error(e);
             });
-
         } else {
-          res.end("ERROR: Destination account is not set up to accept " + TOKEN_NAME + ". SOLUTION: Set up destination account to accept " + TOKEN_NAME + ".");
+          res.status(400).end("ERROR: Destination account is not set up to accept " + TOKEN_NAME + ". SOLUTION: Set up destination account to accept " + TOKEN_NAME + ".");
         }
 
       });
