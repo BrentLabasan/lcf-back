@@ -1,13 +1,17 @@
 var express = require('express');
-var bodyParser = require('body-parser');
 var cors = require('cors');
+var bodyParser = require('body-parser');
 var app = express();
+var moment = require('moment');
+var StellarSdk = require('stellar-sdk');
+
+const { Client } = require('pg');
+
 app.use(cors()); // https://www.npmjs.com/package/cors
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-var moment = require('moment');
-var StellarSdk = require('stellar-sdk');
-const { Client } = require('pg');
+
+// Postgres code, currently not being used.
 
 // const client = new Client({
 //   connectionString: process.env.DATABASE_URL,
