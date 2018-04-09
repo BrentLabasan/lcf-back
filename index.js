@@ -116,19 +116,19 @@ app.post('/sends/create', function (req, res) {
           // alert("Account has more than 4.5");
         } else {
           // alert("Account has less than 4.5");
-          res.end("ERROR: Destination account does not have enough XLM (4.5) in baseline funds to support all Time Saved Tokens. SOLUTION: Put more XLM into that account.");
+          res.status(400).end("ERROR: Destination account does not have enough XLM (4.5) in baseline funds to support all Time Saved Tokens. SOLUTION: Put more XLM into that account.");
         }
 
         // Step 3: Ensure account can accept asset. 
         let canAcceptToken = false;
         let i = 0;
         result.balances.forEach((b) => {
-          if (b.asset_code) {
+          if (b.asset_code) { // Check for null first...can probably be  put into the below if statement.
             // console.log("typeof b.asset_code", typeof b.asset_code);
             // console.log("compare balances accepted vs. tab's token", this.props.selectedToken.toUpperCase(), b.asset_code.toUpperCase()); // from front end code
             if (TOKEN_NAME === b.asset_code.toUpperCase()) {
               canAcceptToken = true;
-              // There's no built-in ability to break in forEach. https://stackoverflow.com/a/2641374
+              // There's no built-in ability to break in forEach loop, which'd you'd want to do after confirming account can accept the token. Every balance is checked against. https://stackoverflow.com/a/2641374
               if (parseFloat(b.balance) >= parseFloat(accountMaxAmounts[TOKEN_NAME])) {
                 res.status(200).end("Your account contains more than " + accountMaxAmounts[TOKEN_NAME] + " " + TOKEN_NAME + "s. Tip other people with those tokens, then try again.");
               }
