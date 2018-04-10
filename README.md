@@ -1,6 +1,8 @@
 # lcf-back
 
-The API backend for LabasanCryptoFountain.com. It is a  barebones Node.js app using [Express 4](http://expressjs.com/).
+The API backend for [LabasanCryptoFountain.com](http://LabasanCryptoFountain.com).
+
+It is a barebones Node.js app using Express 4, cloned from https://github.com/heroku/node-js-sample.
 
 Postgress (PG) NPM package is listed in the package.json, but I'm not using it.
 
