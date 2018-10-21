@@ -39,14 +39,12 @@ app.get('/', function (request, response) {
 })
 
 app.get('/mariadb', function (request, response) {
-  var connection = mysql.createConnection('mysql://ox89d93aln3ng5c8:gf9n8m0thkc9t1up@d5x4ae6ze2og6sjo.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/t08mtzydsp1kbq5l');
+  var connection = mysql.createConnection(process.env.JAWSDB_MARIA_URL);
   let s = "";
   connection.connect();
 
   connection.query('SELECT * FROM test AS data;', (err, rows, fields) => {
     if (err) throw err;
-
-    // console.log('The solution is: ', rows[0].solution);
     
     for (row in rows) {
       // console.log(row.Id + " " + row.Currency);
