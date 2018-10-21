@@ -80,7 +80,13 @@ app.post('/txn/create', function (req, res) {
   var connection = mysql.createConnection(process.env.JAWSDB_MARIA_URL);
   connection.connect();
 
-  connection.query('SELECT * FROM test AS data;', (err, rows, fields) => {
+  let query = 
+    `INSERT INTO
+	    Transaction (EmailSender, EmailReceiver, TokenName, Amount, Message)
+    VALUES
+      ("CREATED IN API","CREATED IN API","CREATED IN API",1,"CREATED IN API")`;
+
+  connection.query(query, (err, rows, fields) => {
     // res.send("req.body" + req.body, 200);
     res.status(200).send("req.body" + req.body);
 

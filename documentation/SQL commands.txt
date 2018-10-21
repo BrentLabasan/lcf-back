@@ -1,0 +1,5 @@
+create new transaction
+INSERT INTO
+	Transaction (EmailSender, EmailReceiver, TokenName, Amount, Message)
+VALUES
+	("a","b","c",1,"d")
