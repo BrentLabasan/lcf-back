@@ -84,9 +84,12 @@ app.post('/txn/create', function (req, res) {
     `INSERT INTO
 	    Transaction (EmailSender, EmailReceiver, TokenName, Amount, Message)
     VALUES
-      ("CREATED IN API","CREATED IN API","CREATED IN API",1,"CREATED IN API")`;
+      (?, ?, ?, ?, ?)`;
 
-  connection.query(query, (err, rows, fields) => {
+  
+  let data = [req.body.EmailSender, req.body.EmailReceiver, req.body.TokenName, req.body.Amount, req.body.Message];
+
+  connection.query(query, data, (err, rows, fields) => {
     // res.send("req.body" + req.body, 200);
     res.status(200).send("req.body" + req.body);
 
