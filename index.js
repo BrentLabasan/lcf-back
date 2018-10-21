@@ -62,7 +62,7 @@ app.get('/mariadb', function (request, response) {
     }
 
     console.log(s);
-    response.send("DNE" + s);
+    response.status(200).send("DNE" + s);
   });
 
   console.log("before connection.end()");
