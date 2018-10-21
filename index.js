@@ -4,8 +4,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var moment = require('moment');
 var StellarSdk = require('stellar-sdk');
-
-const { Client } = require('pg');
+var mysql = require('mysql');
 
 app.use(cors()); // https://www.npmjs.com/package/cors
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,11 +33,48 @@ app.use(bodyParser.json());
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
-/*
+
 app.get('/', function (request, response) {
   response.send('Hello World!')
 })
-*/
+
+app.get('/mariadb', function (request, response) {
+  var connection = mysql.createConnection('mysql://ox89d93aln3ng5c8:gf9n8m0thkc9t1up@d5x4ae6ze2og6sjo.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/t08mtzydsp1kbq5l');
+  let s = "";
+  connection.connect();
+
+  connection.query('SELECT * FROM test AS data;', (err, rows, fields) => {
+    if (err) throw err;
+
+    // console.log('The solution is: ', rows[0].solution);
+    
+    for (row in rows) {
+      // console.log(row.Id + " " + row.Currency);
+      console.log(row);
+    }
+
+    
+    for (let i = 0; i < rows.length; i++) {
+      console.log(rows[i].Id + " " + rows[i].Currency );
+      s += rows[i].Id + " " + rows[i].Currency;
+    }
+
+    /*
+    [ RowDataPacket { Id: 1, Currency: 'test text 1' },
+  RowDataPacket { Id: 2, Currency: 'test text 2' },
+  RowDataPacket { Id: 3, Currency: 'test text 9' },
+  RowDataPacket { Id: 4, Currency: 'test text' } ]
+  */
+
+    console.log(s);
+    // console.log(fields);
+    // wtf is this
+    response.send("DNE" + s);
+  });
+console.log("sssss " + s);
+  connection.end();
+  // response.send("DNE" + s);
+})
 
 /*
 app.get('/send/create', function (request, response) {
