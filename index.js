@@ -73,10 +73,16 @@ app.get('/mariadb', function (request, response) {
   console.log("after connection.end()");
 })
 
-app.get('/txn/create', function (req, res) {
-  console.log(req.body);
+app.post('/txn/create', function (req, res) {
+  console.log("req.body", req.body);
+  console.log("req.body.EmailSender", req.body.EmailSender);
+
+  var connection = mysql.createConnection(process.env.JAWSDB_MARIA_URL);
+  connection.connect();
 
   connection.query('SELECT * FROM test AS data;', (err, rows, fields) => {
+    // res.send("req.body" + req.body, 200);
+    res.status(200).send("req.body" + req.body);
 
   });
 

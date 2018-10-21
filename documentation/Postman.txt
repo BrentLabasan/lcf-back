@@ -1,0 +1,7 @@
+{
+	"EmailSender": "sender@sender.com",
+	"EmailReceiver": "receiver@receiver.com",
+	"TokenName": "SECOND",
+	"Amount": "3",
+	"Message": "test txn with SECOND tokens"
+}
