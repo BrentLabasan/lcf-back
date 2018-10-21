@@ -49,11 +49,14 @@ app.get('/mariadb', function (request, response) {
   connection.query('SELECT * FROM test AS data;', (err, rows, fields) => {
     if (err) throw err;
 
-    // This doesn't work for some reason.
+    /*
     for (row in rows) {
+      // This doesn't work for some reason.
       // console.log(row.Id + " " + row.Currency);
-      console.log(row);
+      // This one doesn't work either, it just prints out the index (0,1,2...)
+      // console.log(row);
     }
+    */
 
     // But this works.
     for (let i = 0; i < rows.length; i++) {
@@ -63,6 +66,18 @@ app.get('/mariadb', function (request, response) {
 
     console.log(s);
     response.status(200).send("DNE" + s);
+  });
+
+  console.log("before connection.end()");
+  connection.end();
+  console.log("after connection.end()");
+})
+
+app.get('/txn/create', function (req, res) {
+  console.log(req.body);
+
+  connection.query('SELECT * FROM test AS data;', (err, rows, fields) => {
+
   });
 
   console.log("before connection.end()");
