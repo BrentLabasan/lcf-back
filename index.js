@@ -43,35 +43,31 @@ app.get('/mariadb', function (request, response) {
   let s = "";
   connection.connect();
 
+  /* 
+  fields, I dunno what that is. It's a bunch of random unusuable stuff.
+  */
   connection.query('SELECT * FROM test AS data;', (err, rows, fields) => {
     if (err) throw err;
-    
+
+    // This doesn't work for some reason.
     for (row in rows) {
       // console.log(row.Id + " " + row.Currency);
       console.log(row);
     }
 
-    
+    // But this works.
     for (let i = 0; i < rows.length; i++) {
-      console.log(rows[i].Id + " " + rows[i].Currency );
+      console.log(rows[i].Id + " " + rows[i].Currency);
       s += rows[i].Id + " " + rows[i].Currency;
     }
 
-    /*
-    [ RowDataPacket { Id: 1, Currency: 'test text 1' },
-  RowDataPacket { Id: 2, Currency: 'test text 2' },
-  RowDataPacket { Id: 3, Currency: 'test text 9' },
-  RowDataPacket { Id: 4, Currency: 'test text' } ]
-  */
-
     console.log(s);
-    // console.log(fields);
-    // wtf is this
     response.send("DNE" + s);
   });
-console.log("sssss " + s);
+
+  console.log("before connection.end()");
   connection.end();
-  // response.send("DNE" + s);
+  console.log("after connection.end()");
 })
 
 /*
