@@ -2,6 +2,6 @@
   "name": "lcf-back",
   "description": "The API backend for LabasanCryptoFountain.com.",
   "repository": "https://github.com/brentlabasan/lcf-back",
-  "logo": "https://rawgit.com/heroku/node-js-sample/master/public/node.svg",
+  "logo": "https://cdn.jsdelivr.net/gh/heroku/node-js-sample/public/node.svg",
   "keywords": ["node", "express", "static"]
 }
